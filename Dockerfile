@@ -4,13 +4,12 @@ WORKDIR /app
 
 ADD sinatra_health.rb /app
 ADD sinatra_hello_world.rb /app
+ADD app_wrapper.sh /app
 RUN gem install sinatra
 
 EXPOSE 4567 4568
 
-CMD ["nohup", "ruby", "/app/sinatra_health.rb", ">>", "app.log", "2>&1", "&", \
-        "&&", \
-        "ruby", "/app/sinatra_hello_world.rb" \
+CMD [ "/app/app_wrapper.sh" \
 #        "pipenv",               \
 #        "run",                  \
 #        "gunicorn",             \
